@@ -5,7 +5,14 @@ function clock() {
   $(".hour").css("transform", "rotate(" + o + "deg)");
   $(".minute").css("transform", "rotate(" + a + "deg)");
 }
+
 function refreshClock() {
   clock(), setTimeout(refreshClock, 1000)
 }
-refreshClock();
+
+$(document).ready(function() {
+  refreshClock();
+  if (typeof webvfx != 'undefined') {
+    webvfx.readyRender(true);
+  }
+});
