@@ -10,9 +10,20 @@ function refreshClock() {
   clock(), setTimeout(refreshClock, 1000)
 }
 
-$(document).ready(function() {
+function render(time) {
+  webvfx.getImage("video").assignToHTMLImageElement(document.getElementById("image"));
+}
+
+function init() {
   refreshClock();
+
   if (typeof webvfx != 'undefined') {
+    webvfx.renderRequested.connect(render);
+    webvfx.imageTypeMap = { "video" : webvfx.SourceImageType };
     webvfx.readyRender(true);
   }
-});
+}
+
+
+
+window.addEventListener("load", init, false);
